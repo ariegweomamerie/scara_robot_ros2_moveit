@@ -318,3 +318,43 @@ For issues and questions:
 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for improvements.
+
+## Runtime checklist (quick)
+
+If MoveIt complains about missing joint states or execution aborts, follow these steps on the machine where you run the robot and controllers:
+
+1. Verify joint states are being published:
+
+```bash
+ros2 topic list | grep joint_states
+ros2 topic echo /joint_states -n1
+```
+
+2. If `/joint_states` is missing or has stale timestamps, spawn the joint state broadcaster and controllers using the helper script included in the workspace root:
+
+```bash
+cd ~/scare_ws
+source install/setup.bash
+./scripts/spawn_controllers.sh /controller_manager
+```
+
+3. Verify controllers are listed:
+
+```bash
+ros2 service call /controller_manager/list_controllers controller_manager_msgs/srv/ListControllers '{}'
+```
+
+4. If MoveIt warns about kinematics plugins, ensure the kinematics plugin package is installed (for KDL solver):
+
+```bash
+sudo apt update
+sudo apt install ros-jazzy-kdl-kinematics
+```
+
+If your ROS distro differs (not Jazzy), replace the package name accordingly.
+
+5. Common fixes:
+- Joint names with spaces can be problematic; consider renaming joints to simple identifiers (e.g. `revolute_1`, `prismatic_z`) if you encounter mapping issues between URDF and controllers.
+- Ensure timestamps on joint_state messages are correct (not 0.0) and that clocks are synced if across machines.
+
+If you'd like, I can (a) add controller spawn into a launch file, or (b) help rename joints for better tooling compatibility.
