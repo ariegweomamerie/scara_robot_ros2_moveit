@@ -116,187 +116,189 @@ Step 6: Set End Effector
     Click "Add End Effector"
 
     Set Name and select parent link
-
-Step 7: Generate Configuration Files
-
-    Go to "Configuration Files" tab
-
-    Set output path for your MoveIt config package
-
-    Click "Generate Package"
-
-
-1. Start Screen
-
-Initial screen when you load your URDF.
-
-Here you choose the URDF file you want to generate a MoveIt config for.
-
-Also lets you select the package path for the new MoveIt config package.
-
-Action: Pick your urdf_to_sdf_gazebo.urdf and set the destination folder (scara_robot_moveit_config).
-
-2. Self-Collision
-
-Defines which robot links should or should not be checked for collisions.
-
-MoveIt can ignore collisions for adjacent links or links that are physically constrained.
-
-Action: Usually, just keep the default collision matrix initially; you can edit later manually.
-
-3. Virtual Joints
-
-Allows you to attach the robot to the world frame virtually.
-
-Important for mobile bases or when the robot is fixed in a specific frame.
-
-Action: For a stationary SCARA robot, attach a world frame at base_link.
-
 4. Planning Groups
 
-Groups of joints and links that MoveIt will plan for.
+# scara_robot_ros2_moveit
 
-Examples: arm, gripper.
+This repository contains a ROS 2 workspace for a SCARA robot. It includes the URDF model, MoveIt 2 configuration for motion planning, and launch files for simulation and visualization. The robot model is provided with STL meshes and configured with ros2_control.
 
-Action: Define your SCARA robot’s arm as a group, add the joints in the correct order.
+## Table of Contents
 
-5. Robot Poses
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+    - [ROS 2 installation](#ros-2-installation)
+    - [MoveIt 2 installation](#moveit-2-installation)
+- [Workspace setup](#workspace-setup)
+- [MoveIt Setup Assistant Guide](#moveit-setup-assistant-guide)
+- [Building the workspace](#building-the-workspace)
+- [Running the demo](#running-the-demo)
+- [Moving your robot with MoveIt](#moving-your-robot-with-moveit)
+- [Project structure](#project-structure)
+- [Troubleshooting & runtime checklist](#troubleshooting--runtime-checklist)
+- [Contributing](#contributing)
 
-Predefined named robot poses you can load in RViz.
+## Overview
 
-Useful for simulations, demos, or starting positions for planning.
+This project provides a ROS 2 implementation of a SCARA robot with MoveIt 2 integration, including:
 
-Action: Optional, you can add home, ready, or pick poses.
+- URDF robot model with 3D meshes
+- MoveIt 2 configuration for motion planning
+- ros2_control interfaces and controller configs
+- RViz visualization configurations and launch files
 
-6. End Effectors
+## Prerequisites
 
-Defines the robot’s tool or gripper.
+### ROS 2 installation
 
-Connects the end effector to a planning group.
+Ensure you have ROS 2 (Jazzy or your target distro) installed. To verify:
 
-Action: Add your gripper link if your SCARA robot has one.
+```bash
+ros2 --version
+echo $ROS_DISTRO
+```
 
-7. Passive Joints
+### MoveIt 2 installation
 
-Joints that are not actuated or controlled.
+Install MoveIt 2 for your ROS 2 distro. For Jazzy the package name is `ros-jazzy-moveit`:
 
-MoveIt will ignore them for planning but still consider them in collisions.
+```bash
+sudo apt update
+sudo apt install ros-jazzy-moveit
+```
 
-Action: Optional if SCARA has any passive joints.
+Verify installation:
 
-8. ROS 2 Control URDF Model
+```bash
+ros2 pkg list | grep moveit
+```
 
-Loads the ros2_control compatible URDF (with transmission tags).
+## Workspace setup
 
-MoveIt uses this for simulation and controller integration.
+1. Create a workspace and clone this repository:
 
-Action: Use this if you want to integrate with ros2_control.
+```bash
+mkdir -p ~/scare_ws/src
+cd ~/scare_ws/src
+git clone <https://github.com/ariegweomamerie/scara_robot_ros2_moveit.git>
+```
 
-9. ROS 2 Controllers
+2. Build the workspace (see "Building the workspace" below).
 
-Defines control interfaces for MoveIt to command joints.
+## MoveIt Setup Assistant Guide
 
-Examples: JointTrajectoryController, PositionJointInterface.
+1. Launch the MoveIt Setup Assistant:
 
-Action: Needed for real robots or Gazebo simulations.
+```bash
+ros2 launch moveit_setup_assistant setup_assistant.launch.py
+```
 
-10. MoveIt Controllers
+2. Create a new MoveIt configuration package and point it to the URDF `urdf_to_sdf_gazebo.urdf`.
+3. Configure self-collisions, virtual joints, planning groups, robot poses, end effector, passive joints, and controllers as needed.
+4. Generate the configuration package into `scara_robot_moveit_config`.
 
-Maps planning groups to ROS 2 controllers.
+Notes and common actions
 
-Ensures that the planner knows which controller drives which group.
+- For a stationary SCARA robot, attach a virtual world joint at `base_link`.
+- When defining planning groups, use consistent joint names that match your URDF and controller configs.
 
-Action: Required if you plan to execute motions.
+## Building the workspace
 
-11. Perception
+From the workspace root:
 
-Configuration for sensors and scene perception.
-
-Usually includes point clouds, depth cameras, or fake sensors in simulation.
-
-Action: Optional unless you are adding perception pipelines.
-
-12. Launch Files
-
-Automatically generates launch files to run MoveIt in RViz, start move_group, or connect controllers.
-
-Action: You’ll use these to launch MoveIt (moveit_rviz.launch.py etc.).
-
-13. Author Information
-
-Metadata for the generated package (author, email, license).
-
-Action: Fill in your info; used in package.xml.
-
-14. Configuration Files
-
-Shows all generated YAML, SRDF, RViz configs.
-
-Action: Check that all required files exist (kinematics.yaml, joint_limits.yaml, ompl_planning.yaml).
-
-
-
-
-Building the Workspace
-
+```bash
 cd ~/scare_ws
 colcon build
 source install/setup.bash
+```
 
-Running the Demo
-Launch MoveIt Demo
+For debug builds you can run:
 
-cd ~/scare_ws
+```bash
+colcon build --mixin debug
+```
+
+## Running the demo
+
+After building and sourcing:
+
+```bash
 source install/setup.bash
 ros2 launch scara_robot_moveit_config demo.launch.py
+```
 
+## Moving your robot with MoveIt
 
-Moving Your Robot with MoveIt 🎯
-Method 1: Interactive Markers in RViz
+Method 1 — Interactive markers in RViz
 
-    Launch the demo (as shown above)
+- Launch the demo (above).
+- Use interactive markers to set a goal pose and plan/execute from RViz.
 
-    In RViz, you'll see:
+Method 2 — MotionPlanning panel
 
-        Green robot: Start state
+- Select planning group `scara_arm`.
+- Set planning time and request a plan.
 
-        Orange robot: Goal state
+This repository also contains a small planning-only node (does not execute trajectories) for testing planning behavior.
 
-        Interactive markers (3D arrows) around the end effector
+## Project structure
 
-    To plan a motion:
-
-        Drag the interactive markers to position the end effector
-
-        Click "Plan" in the MotionPlanning panel to see the planned path
-
-        Click "Execute" to move the robot
-
-Method 2: Using the MotionPlanning Panel
-
-    In the MotionPlanning panel:
-
-        Select planning group: scara_arm
-
-        Set planning time (default: 5 seconds)
-
-        Use "Query Goal State" to set target positions
-
-    Plan and Execute:
-
-        Plan: Generates a trajectory without moving
-
-        Execute: Runs the trajectory on the robot
-
-        Plan & Execute: Does both automatically
-
-Project Structure
+```
 scare_ws/
 ├── src/
 │   ├── scara_robot_cpp_pkg/
 │   │   ├── urdf/                 # Robot URDF files
 │   │   ├── meshes/               # 3D model meshes
 │   │   ├── launch/               # Launch files
+│   │   └── package.xml
+│   └── scara_robot_moveit_config/
+│       ├── config/               # MoveIt configuration
+│       ├── launch/               # MoveIt launch files
+│       └── package.xml
+├── build/
+├── install/
+└── log/
+```
+
+## Troubleshooting & runtime checklist
+
+If MoveIt complains about missing joint states or execution aborts, follow these steps on the machine where you run the robot and controllers:
+
+1. Verify joint states are being published:
+
+```bash
+ros2 topic list | grep joint_states
+ros2 topic echo /joint_states -n1
+```
+
+2. If `/joint_states` is missing or has stale timestamps, spawn the joint state broadcaster and controllers using the helper script included in the workspace root:
+
+```bash
+cd ~/scare_ws
+source install/setup.bash
+./scripts/spawn_controllers.sh /controller_manager
+```
+
+3. Verify controllers are listed:
+
+```bash
+ros2 service call /controller_manager/list_controllers controller_manager_msgs/srv/ListControllers '{}'
+```
+
+4. If MoveIt warns about kinematics plugins, ensure the kinematics plugin package is installed (example for KDL solver on Jazzy):
+
+```bash
+sudo apt update
+sudo apt install ros-jazzy-kdl-kinematics
+```
+
+5. Common fixes
+
+- Joint names with spaces can be problematic; consider renaming joints to simple identifiers (for example `revolute_1`, `prismatic_z`) if you encounter mapping issues.
+- Ensure timestamps on `joint_states` (header.stamp) are correct (not `0.0`) and that clocks are synced if running across machines.
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests for improvements.
 │   │   └── package.xml
 │   └── scara_robot_moveit_config/
 │       ├── config/               # MoveIt configuration
