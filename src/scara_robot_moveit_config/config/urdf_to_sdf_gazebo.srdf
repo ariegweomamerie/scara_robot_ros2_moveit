@@ -25,7 +25,7 @@
         <joint name="Slider 11" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="Scara_Effector" parent_link="base_link" group="scara_gripper"/>
+    <end_effector name="Scara_Effector" parent_link="gripper_rail_6mm_bottom_link_1" group="scara_arm"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="arm_cover_link_1" link2="arm_two_cover_link_1" reason="Adjacent"/>
     <disable_collisions link1="arm_cover_link_1" link2="base_link" reason="Never"/>

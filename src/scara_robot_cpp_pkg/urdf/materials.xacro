@@ -1,8 +1,25 @@
 <?xml version="1.0" ?>
 <robot name="urdf_to_sdf_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
+<!-- Material Definitions -->
 <material name="silver">
-  <color rgba="0.700 0.700 0.700 1.000"/>
+  <color rgba="0.700 0.700 0.700 1.0"/>
+</material>
+
+<material name="black">
+  <color rgba="0.100 0.100 0.100 1.0"/>
+</material>
+
+<material name="blue">
+  <color rgba="0.000 0.000 0.800 1.0"/>
+</material>
+
+<material name="green">
+  <color rgba="0.000 0.800 0.000 1.0"/>
+</material>
+
+<material name="red">
+  <color rgba="0.800 0.000 0.000 1.0"/>
 </material>
 
 </robot>
