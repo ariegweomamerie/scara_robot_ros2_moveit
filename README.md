@@ -258,9 +258,9 @@ Method 1: Interactive Markers in RViz
 
     In RViz, you'll see:
 
-        Orange robot: Start state
+        Green robot: Start state
 
-        Green robot: Goal state
+        Orange robot: Goal state
 
         Interactive markers (3D arrows) around the end effector
 
