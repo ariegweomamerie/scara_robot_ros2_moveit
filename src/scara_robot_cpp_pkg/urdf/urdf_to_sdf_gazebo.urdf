@@ -1,6 +1,11 @@
 <?xml version="1.0" ?>
 <robot name="urdf_to_sdf_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- Material definitions -->
+  <material name="silver">
+    <color rgba="0.75 0.75 0.75 1.0"/>
+  </material>
+
 <!-- <xacro:include filename="$(find scare_description_robot)/urdf/materials.xacro" />
 <xacro:include filename="$(find scare_description_robot)/urdf/urdf_to_sdf_gazebo.trans" />
 <xacro:include filename="$(find scare_description_robot)/urdf/urdf_to_sdf_gazebo.gazebo" /> -->
