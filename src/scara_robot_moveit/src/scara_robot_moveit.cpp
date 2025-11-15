@@ -59,7 +59,7 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(logger, "Joint-space planning succeeded. (NOTE: this node only plans; not executing trajectories)");
       // Print some simple info about the computed plan
       try {
-        RCLCPP_INFO(logger, "Planned trajectory contains %zu points", plan.trajectory_.joint_trajectory.points.size());
+  RCLCPP_INFO(logger, "Planned trajectory contains %zu points", plan.trajectory.joint_trajectory.points.size());
       } catch (...) {
         RCLCPP_INFO(logger, "Planned trajectory info not available to print");
       }
@@ -86,7 +86,7 @@ int main(int argc, char * argv[])
     if (success) {
       RCLCPP_INFO(logger, "Pose planning succeeded. (NOTE: this node only plans; not executing trajectories)");
       try {
-        RCLCPP_INFO(logger, "Planned trajectory contains %zu points", plan.trajectory_.joint_trajectory.points.size());
+  RCLCPP_INFO(logger, "Planned trajectory contains %zu points", plan.trajectory.joint_trajectory.points.size());
       } catch (...) {
         RCLCPP_INFO(logger, "Planned trajectory info not available to print");
       }
