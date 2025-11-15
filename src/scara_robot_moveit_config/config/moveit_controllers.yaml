@@ -1,0 +1,22 @@
+# MoveIt uses this configuration for controller management
+
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - scara_arm_controller
+    - scara_gripper_controller
+
+  scara_arm_controller:
+    type: FollowJointTrajectory
+    joints:
+      - Revolute 10
+      - Slider 11
+      - Revolute 8
+      - Revolute 7
+  scara_gripper_controller:
+    type: FollowJointTrajectory
+    joints:
+      - Revolute 7
+      - Slider 4
+      - Slider 5

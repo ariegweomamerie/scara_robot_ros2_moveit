@@ -1,0 +1,41 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    scara_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    scara_gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+scara_arm_controller:
+  ros__parameters:
+    joints:
+      - Revolute 10
+      - Revolute 8
+      - Slider 11
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
+
+
+scara_gripper_controller:
+  ros__parameters:
+    joints:
+      - Revolute 7
+      - Slider 4
+      - Slider 5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true

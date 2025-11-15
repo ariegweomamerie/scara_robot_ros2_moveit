@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: scara_robot_cpp_pkg
+    relative_path: urdf/urdf_to_sdf_gazebo.urdf
+  srdf:
+    relative_path: config/urdf_to_sdf_gazebo.srdf
+  package_settings:
+    author_name: Mr Internet
+    author_email: ariegweomamerie@gmail.com
+    generated_timestamp: 1763136188
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

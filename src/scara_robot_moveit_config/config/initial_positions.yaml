@@ -1,0 +1,9 @@
+# Default initial positions for urdf_to_sdf_gazebo's ros2_control fake system
+
+initial_positions:
+  Revolute 10: 0
+  Revolute 7: 0
+  Revolute 8: 0
+  Slider 11: 0
+  Slider 4: 0
+  Slider 5: 0

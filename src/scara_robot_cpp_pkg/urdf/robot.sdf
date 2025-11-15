@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <world name="urdf_to_sdf_gazebo_world">
+
+    <!-- Physics setup -->
+    <physics name="1ms" type="Simbody">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+
+    </physics>
+
+    <!-- Essential plugins -->
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <!-- Lighting -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Main robot model -->
+    <model name="urdf_to_sdf_gazebo">
+      <pose>0 0 0.03 0 0 0</pose>
+      <link name="base_link">
+        <inertial>
+          <pose>-0.0070117442454045035 -0.004059755672044273 0.01853626945061938 0 0 0</pose>
+          <mass>3.938894865418581</mass>
+          <inertia>
+            <ixx>0.009172</ixx>
+            <iyy>0.018106</iyy>
+            <izz>0.026037</izz>
+            <ixy>-0.000742</ixy>
+            <iyz>3.6e-05</iyz>
+            <ixz>-0.000108</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="base_link_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/general/urdf_to_sdf_gazebo_description/meshes/base_link.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+            <specular>0.5 0.5 0.5 1</specular>
+          </material>
+        </visual>
+
+        <collision name="base_link_collision">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/general/urdf_to_sdf_gazebo_description/meshes/base_link.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Fixed joint to connect base to world -->
+      <joint name="base_link_fixed_joint" type="fixed">
+        <parent>world</parent>
+        <child>base_link</child>
+      </joint>
+
+      <link name="gripper_handleftlink_1">
+        
+        <inertial>
+          <pose>-0.010868150575173707 -0.008378638812419237 -0.046602806658064974 0 0 0</pose>
+          <mass>0.36256322250397477</mass>
+          <inertia>
+            <ixx>0.000417</ixx>
+            <iyy>0.000417</iyy>
+            <izz>5.8e-05</izz>
+            <ixy>-4e-06</ixy>
+            <iyz>-3.8e-05</iyz>
+            <ixz>-4.7e-05</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="gripper_handleftlink_1_visual">
+          <pose>-0.400195 -0.16626 -0.128702 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_handleftlink_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="gripper_handleftlink_1_collision">
+          <pose>-0.400195 -0.16626 -0.128702 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_handleftlink_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="gripper_mechanismslider_link_1">
+        <pose>0.3 0 0.2 0 0 0</pose>
+        <inertial>
+          <pose>0.012024165264874431 0.009150823772680894 -0.04620580836729517 0 0 0</pose>
+          <mass>0.3625920933827462</mass>
+          <inertia>
+            <ixx>0.000411</ixx>
+            <iyy>0.000413</iyy>
+            <izz>6.1e-05</izz>
+            <ixy>-6e-06</ixy>
+            <iyz>4.1e-05</iyz>
+            <ixz>5.3e-05</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="gripper_mechanismslider_link_1_visual">
+          <pose>-0.299785 -0.09181 -0.128702 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_mechanismslider_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="gripper_mechanismslider_link_1_collision">
+          <pose>-0.299785 -0.09181 -0.128702 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_mechanismslider_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="gripper_rail_6mm_bottom_link_1">
+        <pose>0.33 0.12 0.2 0 0 0</pose>
+        <inertial>
+          <pose>0.00022857868610060006 0.0004476121226026364 -0.029491948728123968 0 0 0</pose>
+          <mass>0.6641305311549246</mass>
+          <inertia>
+            <ixx>0.000618</ixx>
+            <iyy>0.000653</iyy>
+            <izz>0.000363</izz>
+            <ixy>-5.3e-05</ixy>
+            <iyz>-3e-06</iyz>
+            <ixz>5e-06</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="gripper_rail_6mm_bottom_link_1_visual">
+          <pose>-0.349498 -0.128931 -0.162637 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_rail_6mm_bottom_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="gripper_rail_6mm_bottom_link_1_collision">
+          <pose>-0.349498 -0.128931 -0.162637 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/gripper_rail_6mm_bottom_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="arm_two_cover_link_1">
+        <pose>0.256 0.02 0.255 0 0 0</pose>
+        <inertial>
+          <pose>0.035241807533543335 0.04796212281162526 -0.03376987123810021 0 0 0</pose>
+          <mass>2.511589379326445</mass>
+          <inertia>
+            <ixx>0.007821</ixx>
+            <pose>0 0 0.0135 0 0 0</pose>
+            <iyy>0.005245</iyy>
+            <izz>0.011615</izz>
+            <ixy>-0.004163</ixy>
+            <iyz>0.000509</iyz>
+            <ixz>0.000373</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="arm_two_cover_link_1_visual">
+          <pose>-0.268734 -0.019208 -0.22035 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/arm_two_cover_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="arm_two_cover_link_1_collision">
+          <pose>-0.268734 -0.019208 -0.22035 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/arm_two_cover_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="z-axis_top_plate_link_1">
+        <pose>0.03 0 0.0335 0 0 0</pose>
+        <inertial>
+          <pose>0.0008602439988536284 0.0002178103000136028 0.18808008938577278 0 0 0</pose>
+          <mass>4.175380318770853</mass>
+          <inertia>
+            <ixx>0.146443</ixx>
+            <iyy>0.146523</iyy>
+            <izz>0.008141</izz>
+            <ixy>-1.4e-05</ixy>
+            <iyz>-0.000149</iyz>
+            <ixz>9.2e-05</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="z-axis_top_plate_link_1_visual">
+          <pose>-0.041226 9.1e-05 -0.033561 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/z-axis_top_plate_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="z-axis_top_plate_link_1_collision">
+          <pose>-0.041226 9.1e-05 -0.033561 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>
+                file:///home/general/urdf_to_sdf_gazebo_description/meshes/z-axis_top_plate_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="arm_cover_link_1">
+        <pose>0.063 0.0025 0.3 0 0 0</pose>
+        <inertial>
+          <pose>0.06134439992643813 0.0054249821664409895 -0.022471905199493963 0 0 0</pose>
+          <mass>3.3320688978919453</mass>
+          <inertia>
+            <ixx>0.003993</ixx>
+            <iyy>0.02822</iyy>
+            <izz>0.030522</izz>
+            <ixy>-0.002139</ixy>
+            <iyz>0.000107</iyz>
+            <ixz>0.001225</ixz>
+          </inertia>
+        </inertial>
+
+        <visual name="arm_cover_link_1_visual">
+          <pose>-0.074476 -0.002213 -0.26485 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/general/urdf_to_sdf_gazebo_description/meshes/arm_cover_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1.0 1.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="arm_cover_link_1_collision">
+          <pose>-0.074476 -0.002213 -0.26485 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/general/urdf_to_sdf_gazebo_description/meshes/arm_cover_link_1.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Joints -->
+      <joint name="Slider_4" type="prismatic">
+        <parent>gripper_rail_6mm_bottom_link_1</parent>
+        <child>gripper_handleftlink_1</child>
+        <pose>0.050697 0.037329 -0.033935 0 0 0</pose>
+        <axis>
+          <xyz>0.803283 0.595598 0.0</xyz>
+          <limit>
+            <lower>-0.015</lower>
+            <upper>0.0</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="Slider_5" type="prismatic">
+        <parent>gripper_rail_6mm_bottom_link_1</parent>
+        <child>gripper_mechanismslider_link_1</child>
+        <pose>-0.049713 -0.037121 -0.033935 0 0 0</pose>
+        <axis>
+          <xyz>-0.803283 -0.595598 0.0</xyz>
+          <limit>
+            <lower>-0.019</lower>
+            <upper>0.0</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="Revolute_7" type="revolute">
+        <parent>arm_two_cover_link_1</parent>
+        <child>gripper_rail_6mm_bottom_link_1</child>
+        <pose>0.080764 0.109723 -0.057713 0 0 0</pose>
+        <axis>
+          <xyz>0.0 0.0 1.0</xyz>
+          <limit>
+            <lower>-0.959931</lower>
+            <upper>2.007129</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="Revolute_8" type="revolute">
+        <parent>arm_cover_link_1</parent>
+        <child>arm_two_cover_link_1</child>
+        <pose>0.194258 0.016995 -0.0445 0 0 0</pose>
+        <axis>
+          <xyz>0.0 0.0 1.0</xyz>
+          <limit>
+            <lower>-3.316126</lower>
+            <upper>1.570796</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="Revolute_10" type="revolute">
+        <parent>base_link</parent>
+        <child>z-axis_top_plate_link_1</child>
+        <pose>0.041226 -9.1e-05 0.033561 0 0 0</pose>
+        <axis>
+          <xyz>0.0 0.0 1.0</xyz>
+          <limit>
+            <lower>-2.356194</lower>
+            <upper>2.007129</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="Slider_11" type="prismatic">
+        <parent>z-axis_top_plate_link_1</parent>
+        <child>arm_cover_link_1</child>
+        <pose>0.03325 0.002304 0.231289 0 0 0</pose>
+        <axis>
+          <xyz>0.0 0.0 -1.0</xyz>
+          <limit>
+            <lower>-0.13</lower>
+            <upper>0.1</upper>
+            <effort>100</effort>
+            <velocity>100</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+    </model>
+
+  </world>
+</sdf>

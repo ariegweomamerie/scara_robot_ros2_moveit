@@ -1,0 +1,27 @@
+build/
+install/
+log/
+*.pyc
+__pycache__/
+
+# System
+.DS_Store
+*.swp
+*.swo
+*~
+*.bak
+
+# IDE
+.vscode/
+.idea/
+# Colcon / ROS2 workspace local files
+local_setup.*
+
+# Python virtual env
+venv/
+env/
+
+# Editor backup
+*~
+
+# End

@@ -1,0 +1,202 @@
+<?xml version="1.0" ?>
+<robot name="urdf_to_sdf_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- <xacro:include filename="$(find scare_description_robot)/urdf/materials.xacro" />
+<xacro:include filename="$(find scare_description_robot)/urdf/urdf_to_sdf_gazebo.trans" />
+<xacro:include filename="$(find scare_description_robot)/urdf/urdf_to_sdf_gazebo.gazebo" /> -->
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0070117442454045035 -0.004059755672044273 0.01853626945061938" rpy="0 0 0"/>
+    <mass value="3.938894865418581"/>
+    <inertia ixx="0.009172" iyy="0.018106" izz="0.026037" ixy="-0.000742" iyz="3.6e-05" ixz="-0.000108"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="gripper_handleftlink_1">
+  <inertial>
+    <origin xyz="-0.010868150575173707 -0.008378638812419237 -0.046602806658064974" rpy="0 0 0"/>
+    <mass value="0.36256322250397477"/>
+    <inertia ixx="0.000417" iyy="0.000417" izz="5.8e-05" ixy="-4e-06" iyz="-3.8e-05" ixz="-4.7e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.400195 -0.16626 -0.128702" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.400195 -0.16626 -0.128702" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="gripper_mechanismslider_link_1">
+  <inertial>
+    <origin xyz="0.012024165264874431 0.009150823772680894 -0.04620580836729517" rpy="0 0 0"/>
+    <mass value="0.3625920933827462"/>
+    <inertia ixx="0.000411" iyy="0.000413" izz="6.1e-05" ixy="-6e-06" iyz="4.1e-05" ixz="5.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.299785 -0.09181 -0.128702" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.299785 -0.09181 -0.128702" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="gripper_rail_6mm_bottom_link_1">
+  <inertial>
+    <origin xyz="0.00022857868610060006 0.0004476121226026364 -0.029491948728123968" rpy="0 0 0"/>
+    <mass value="0.6641305311549246"/>
+    <inertia ixx="0.000618" iyy="0.000653" izz="0.000363" ixy="-5.3e-05" iyz="-3e-06" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.349498 -0.128931 -0.162637" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.349498 -0.128931 -0.162637" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="arm_two_cover_link_1">
+  <inertial>
+    <origin xyz="0.035241807533543335 0.04796212281162526 -0.03376987123810021" rpy="0 0 0"/>
+    <mass value="2.511589379326445"/>
+    <inertia ixx="0.007821" iyy="0.005245" izz="0.011615" ixy="-0.004163" iyz="0.000509" ixz="0.000373"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.268734 -0.019208 -0.22035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.268734 -0.019208 -0.22035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="z-axis_top_plate_link_1">
+  <inertial>
+    <origin xyz="0.0008602439988536284 0.0002178103000136028 0.18808008938577278" rpy="0 0 0"/>
+    <mass value="4.175380318770853"/>
+    <inertia ixx="0.146443" iyy="0.146523" izz="0.008141" ixy="-1.4e-05" iyz="-0.000149" ixz="9.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.041226 9.1e-05 -0.033561" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.041226 9.1e-05 -0.033561" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="arm_cover_link_1">
+  <inertial>
+    <origin xyz="0.06134439992643813 0.0054249821664409895 -0.022471905199493963" rpy="0 0 0"/>
+    <mass value="3.3320688978919453"/>
+    <inertia ixx="0.003993" iyy="0.02822" izz="0.030522" ixy="-0.002139" iyz="0.000107" ixz="0.001225"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.074476 -0.002213 -0.26485" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.074476 -0.002213 -0.26485" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://scara_robot_cpp_pkg/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Slider 4" type="prismatic">
+  <origin xyz="0.050697 0.037329 -0.033935" rpy="0 0 0"/>
+  <parent link="gripper_rail_6mm_bottom_link_1"/>
+  <child link="gripper_handleftlink_1"/>
+  <axis xyz="0.803283 0.595598 0.0"/>
+  <limit upper="0.0" lower="-0.015" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Slider 5" type="prismatic">
+  <origin xyz="-0.049713 -0.037121 -0.033935" rpy="0 0 0"/>
+  <parent link="gripper_rail_6mm_bottom_link_1"/>
+  <child link="gripper_mechanismslider_link_1"/>
+  <axis xyz="-0.803283 -0.595598 -0.0"/>
+  <limit upper="0.0" lower="-0.019" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolute 7" type="revolute">
+  <origin xyz="0.080764 0.109723 -0.057713" rpy="0 0 0"/>
+  <parent link="arm_two_cover_link_1"/>
+  <child link="gripper_rail_6mm_bottom_link_1"/>
+  <axis xyz="-0.0 0.0 1.0"/>
+  <limit upper="2.007129" lower="-0.959931" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolute 8" type="revolute">
+  <origin xyz="0.194258 0.016995 -0.0445" rpy="0 0 0"/>
+  <parent link="arm_cover_link_1"/>
+  <child link="arm_two_cover_link_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="1.570796" lower="-3.316126" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolute 10" type="revolute">
+  <origin xyz="0.041226 -9.1e-05 0.033561" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="z-axis_top_plate_link_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="2.007129" lower="-2.356194" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Slider 11" type="prismatic">
+  <origin xyz="0.03325 0.002304 0.231289" rpy="0 0 0"/>
+  <parent link="z-axis_top_plate_link_1"/>
+  <child link="arm_cover_link_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="0.1" lower="-0.13" effort="100" velocity="100"/>
+</joint>
+
+</robot>
